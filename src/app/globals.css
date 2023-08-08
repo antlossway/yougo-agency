@@ -17,11 +17,16 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb)); */
+}
+
+@layer components {
+  /* to hold each section of the page  */
+  .container {
+    @apply min-w-full mx-auto;
+  }
+  .wrapper {
+    @apply max-w-[1440px] px-4 sm:px-6 mx-auto;
+  }
 }

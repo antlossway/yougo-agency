@@ -18,6 +18,7 @@ const config: Config = {
         // "hero-overlay": "#355f08",
         "hero-overlay": "#4682B4",
         muted: "#808085",
+        primary: "#5C5A5E",
       },
       fontSize: {
         "clamp-hero-h1": "clamp(1.5rem, 1rem + 2.5vw, 4rem);",

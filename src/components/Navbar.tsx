@@ -17,15 +17,9 @@ const Navbar = () => {
     <header className="container sticky top -0 z-10 h-16 dark:bg-black">
       <section className="wrapper h-full flex justify-between items-center">
         {/* logo */}
-        <div className=" ">
+        <div className="w-[100px] lg:w-[200px] h-auto relative ">
           <Link href="/">
-            <Image
-              src="/logo-yougo.png"
-              alt="logo"
-              width={100}
-              height={40}
-              className="object-contain lg:w-[200px] lg:h-[80px]"
-            />
+            <img src="/logo-yougo.png" alt="logo" />
           </Link>
         </div>
 

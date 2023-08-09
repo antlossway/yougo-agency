@@ -32,9 +32,7 @@ const SliderItem = ({
         alt={alt}
         fill
         priority
-        objectFit="cover"
-        objectPosition="center"
-        className="-z-10 absolute object-cover mix-blend-multiply opacity-80 "
+        className="-z-10 absolute object-cover object-center mix-blend-multiply opacity-80 "
       />
 
       {/* <div

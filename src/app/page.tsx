@@ -1,34 +1,36 @@
 import Hero from "@/components/Hero";
 import Image from "next/image";
 import Slider from "@/components/Slider";
-import CTA from "@/components/CTA";
+import CTA from "@/components/ui/CTA";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div>
+      <Navbar textColor="text-white" />
       {/* hero */}
       <Slider />
 
-      {/* introduction */}
+      {/* introduction, margin-top 100vh because the slider above is absolute position */}
       <section
-        className="container dark:bg-black dark:text-white
+        className="mt-[100vh] container dark:bg-black dark:text-white
       "
       >
         <div className="wrapper h-full py-10">
-          <div className=" max-w-[80ch] mx-auto">
+          <div className=" max-w-[1024px] mx-auto">
             <h2 className="text-clamp-hero-h1 leading-tight font-bold mb-6">
-              It's exciting to think about an escape.
+              So, you want an escape.
               <br />
               But, there are many questions to be answered.
             </h2>
-            <p className="text-2xl mb-6">
-              <ul className="flex flex-col gap-2">
-                <li>How can I support myself financially?</li>
-                <li>What visa do I need?</li>
-                <li>What about medical insurance? </li>
-                <li>How much tax will I pay?</li>
-              </ul>
-            </p>
+
+            <ul className="text-2xl font-medium mb-6 flex flex-col gap-2">
+              <li>How can I support myself financially?</li>
+              <li>What visa do I need?</li>
+              <li>What about medical insurance? </li>
+              <li>How much tax will I pay?</li>
+            </ul>
+
             <p className="text-3xl font-semibold">
               Yes, above are all valid questions and you should prepare yourself
               well before departure.

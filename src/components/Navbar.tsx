@@ -1,12 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import Menu from "./Menu";
 import { menuItems } from "../../data";
 
-const Navbar = () => {
+type navBarProps = {
+  textColor?: string;
+};
+const Navbar = ({ textColor }: navBarProps) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -14,7 +16,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="container sticky top -0 z-10 h-16 dark:bg-black">
+    // <header className="container sticky top-0 z-10 h-16 dark:bg-black">
+    <header className={`container z-10 h-16 dark:bg-black ${textColor}`}>
       <section className="wrapper h-full flex justify-between items-center">
         {/* logo */}
         <div className="w-[100px] lg:w-[200px] h-auto relative ">

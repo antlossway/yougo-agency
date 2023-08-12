@@ -40,22 +40,27 @@ const Slider = () => {
 
   // bg-gradient-to-r from-[#4682B4]/30 to-[#B22222]/30
   const sliderWidth = `w-[${numOfSlide * 100}vw]`;
+
   return (
+    // <div
+    //   className=" h-[calc(100vh-4rem)] w-screen
+    // relative"
+    // >
     <div
-      className=" h-[calc(100vh-4rem)] w-screen
-    relative"
+      className="absolute top-0 left-0 h-screen w-screen -z-10
+    "
     >
-      <ul
+      <div
         className={`${sliderWidth} h-full flex
         transition-all duration-500 ease-in-out `}
         style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
       >
         {heroSlider.map((item) => (
-          <li key={item.id} className="h-full">
+          <div key={item.id} className="h-full">
             <SliderItem {...item} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
 
       {/* buttons */}
       <div

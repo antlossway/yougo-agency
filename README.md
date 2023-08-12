@@ -1,34 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# agency portal to promote new life in Southeast Asia
 
-## Getting Started
+## Tech tools
+- next.js
+- typescript
+- tailwindcss
+- wordpress (as headless CMS)
 
-First, run the development server:
+## What I learned
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### next.js dynamic routing page.js props
+
+[https://nextjs.org/docs/app/api-reference/file-conventions/page](https://nextjs.org/docs/app/api-reference/file-conventions/page)
+
+- params
+eg. /src/app/countries/[countryName]/page.ts
+URL: /countries/thailand
+params: { countryName: 'thailand'}
+
+```js
+  const CountryInfo = async({params}: { params: {countryName: string} }) => {
+    const {countryName} = params
+  }
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- searchParams
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### hero section images slider (carousel) 
 
-To learn more about Next.js, take a look at the following resources:
+eg. there are 3 images
+- option1:  use button to manually iterate all images
+1) main container has w-100vw, inside container has w-300vw (overflow) 
+2) useState with current slide number: [currentSlide, setCurrentSlide]
+3) button to set current slide number
+4) the inside container will translateX based on the current slide number
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```js
+    const sliderWidth = `w-[${numOfSlide * 100}vw]`;
+  return (
+    <div
+      className=" h-[calc(100vh-4rem)] w-screen
+    relative"
+    >
+      <div
+        className={`${sliderWidth} h-full flex
+        transition-all duration-500 ease-in-out `}
+        style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
+      >
+        {heroSlider.map((item) => (
+          <div key={item.id} className="h-full">
+            <SliderItem {...item} />
+          </div>
+        ))}
+      </div>
+  ...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- option2: use useEffect to automatically iterate all images
 
-## Deploy on Vercel
+- option3: use framer motion (tobe implemented) 
+the problem of translateX is that the transition is too harsh, use framer motion to give fade-in fade-out effect
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### shadcn-ui 
+### installation and configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[https://ui.shadcn.com/docs/installation/next](https://ui.shadcn.com/docs/installation/next)
+
+```
+npx shadcn-ui@latest init
+npx shadcn-ui@latest add navigation-menu
+
+```
+
+### Typescript
+
+The returned result for ACF(Advanced custom field) is a object.
+Object.entries() will convert it to an array of array, and each array contain 2 string field.
+```
+const res = await myAxios.get(`/countries?${query}`);
+const data = res.data;
+const infos: [string, string][] = Object.entries(data[0].acf);
+```

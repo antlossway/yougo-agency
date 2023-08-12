@@ -22,10 +22,10 @@ const config: Config = {
       },
       fontSize: {
         "clamp-hero-h1": "clamp(1.5rem, 1rem + 2.5vw, 4rem);",
-        "clamp-hero-feature": "clamp(1.5rem, 1.2rem + 1.5vw, 3rem);",
+        "clamp-hero-feature": "clamp(1.5rem, 1.2rem + 1.5vw, 2rem);",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;

@@ -1,8 +1,19 @@
 // main menu shown in large screen
 "use client";
-
+import * as React from "react";
 import Link from "next/link";
 import { menuItems } from "../../data";
+
+const countries: { name: string; url: string }[] = [
+  {
+    name: "thailand",
+    url: "/countries/thailand",
+  },
+  {
+    name: "vietnam",
+    url: "/countries/vietnam",
+  },
+];
 
 const Menu = () => {
   return (

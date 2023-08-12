@@ -20,9 +20,10 @@ const SliderItem = ({
   line2,
   line3,
 }: sliderProps) => {
+  // h-[calc(100vh-4rem)]
   return (
     <section
-      className="w-screen h-[calc(100vh-4rem)] relative isolate
+      className="w-screen h-screen relative isolate
       bg-gradient-to-r from-gray-800/50 to-amber-900/50
       "
     >
@@ -40,10 +41,11 @@ const SliderItem = ({
         grid place-content-center
          after:absolute after:-z-10 after:content-[''] after:inset-0 after:bg-hero-overlay/80 after:mix-blend-multiply "
       > */}
+      {/* highlight box with white border */}
       <div
-        className=" absolute left-0 right-0 mx-auto top-10 h-[320px] w-[320px]
-        md:h-[500px] md:w-[500px]
-        border-[10px] border-white/80
+        className=" absolute left-0 right-0 mx-auto top-[20vh] h-[320px] w-[320px]
+        md:h-[350px] md:w-[350px]
+        border-8 border-white/80
         p-10
         grid place-content-center
          after:absolute after:-z-10 after:content-[''] after:inset-0 after:bg-hero-overlay/80 after:mix-blend-multiply "
@@ -64,7 +66,8 @@ const SliderItem = ({
 
           {/* description of feature */}
           {line3 && (
-            <p className="text-clamp-hero-feature font-semibold capitalize">
+            <p className="text-clamp-hero-feature font-semibold capitalize ">
+              {/* text-balance: in future tailwind release */}
               {line3}
             </p>
           )}

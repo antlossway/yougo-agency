@@ -1,15 +1,38 @@
+export type postcardType = {
+  slug: string;
+  title: string;
+  // content: string;
+  excerpt: string;
+  featuredImgUrl: string;
+  category: number;
+};
+
 export const menuItems = [
   {
     name: "about us",
     url: "/about",
   },
+
+  // {
+  //   name: "country guide",
+  //   list: [
+  //     {
+  //       title: "thailand",
+  //       url: "/countries/thailand",
+  //     },
+  //     {
+  //       title: "vietnam",
+  //       url: "/countries/vietnam",
+  //     },
+  //   ],
+  // },
   {
-    name: "resources",
-    url: "/resources",
+    name: "Thailand",
+    url: "/countries/thailand",
   },
   {
-    name: "blog",
-    url: "/blog",
+    name: "articles",
+    url: "/articles", //wordpress /posts
   },
 ];
 

@@ -18,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-primary`}>
-        <Navbar />
+      <body className={`${inter.className} text-primary dark:bg-black `}>
+        {/* <Navbar /> */}
         <main>{children}</main>
         <Footer />
       </body>

@@ -19,17 +19,22 @@ const CountryInfo = async ({ params }: { params: { countryName: string } }) => {
 
   return (
     <>
-      <Navbar textColor="text-white" />
       {/* featured image cover the full screen */}
-      <div className="absolute top-0 left-0 -z-10 w-full h-screen">
+      {/* <div className="absolute top-0 left-0 -z-10 w-full h-screen"> */}
+      <div className="w-full h-screen relative isolate">
         <Image
           src={featuredImgUrl}
           alt="image of thailand"
           fill
-          className="object-cover"
+          className="-z-10 object-cover"
         />
 
-        {/* highlight of country */}
+        {/* navbar on top of fullscreen image */}
+        <div className="absolute top-0 left-0 w-full">
+          <Navbar textStyle="text-white" />
+        </div>
+
+        {/* highlight of country on top of fullscreen image */}
         <Highlight
           title="Thailand"
           subtitle="Luxury Living in the Land of Smiles"
@@ -38,8 +43,13 @@ const CountryInfo = async ({ params }: { params: { countryName: string } }) => {
       </div>
 
       {/* article */}
-      <div
+      {/* <div
         className="mt-[100vh] wrapper py-10
+      dark:bg-black
+    grid place-content-center "
+      > */}
+      <div
+        className="wrapper py-10
       dark:bg-black
     grid place-content-center "
       >

@@ -3,17 +3,25 @@ import Image from "next/image";
 import Slider from "@/components/Slider";
 import CTA from "@/components/ui/CTA";
 import Navbar from "@/components/Navbar";
+import { getCategories, getRecentPosts } from "@/lib/wp-rest";
+import PostCard from "@/components/(posts)/PostCard";
+import { postcardType } from "../../data";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getRecentPosts(10);
+  const categoryMap = await getCategories(); //Map type, 1:'lifestyle', 7:'education'....
+
   return (
     <div>
-      <Navbar textColor="text-white" />
       {/* hero */}
       <Slider />
+      <div className="absolute top-0 left-0 w-full">
+        <Navbar textStyle="text-white" />
+      </div>
 
-      {/* introduction, margin-top 100vh because the slider above is absolute position */}
+      {/* introduction*/}
       <section
-        className="mt-[100vh] container dark:bg-black dark:text-white
+        className=" container dark:bg-black dark:text-white
       "
       >
         <div className="wrapper h-full py-10">
@@ -45,6 +53,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* recent post */}
+      <div className="wrapper mx-auto py-8 grid place-items-center gap-4">
+        <h1 className="text-center text-3xl font-bold">Recent Articles</h1>
+
+        {/* grid of article card */}
+        <div className="w-full mx-auto grid grid-cols-12 gap-4 sm:gap-10">
+          {posts.map((post: postcardType) => (
+            <div
+              key={post.slug}
+              className="max-w-xs sm:max-w-none col-span-full sm:col-span-6 lg:col-span-4 xl:col-span-3"
+            >
+              <PostCard key={post.slug} post={post} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -62,6 +62,7 @@ export const heroSlider = [
     alt: "international school",
     subject: "education",
     line3: "high standard international school",
+    link: "/categories/education",
   },
   {
     id: 2,
@@ -69,6 +70,7 @@ export const heroSlider = [
     alt: "international hospital",
     subject: "medical care",
     line3: "luxury medical experience at affordable price",
+    link: "/categories/healthcare",
   },
   {
     id: 3,
@@ -76,5 +78,6 @@ export const heroSlider = [
     alt: "beach",
     subject: "weekend",
     line3: "Enjoy sun and beach at paradise on the earth",
+    link: "/categories/lifestyle",
   },
 ];

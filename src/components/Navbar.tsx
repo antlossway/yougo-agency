@@ -6,9 +6,9 @@ import Menu from "./Menu";
 import { menuItems } from "../../data";
 
 type navBarProps = {
-  textColor?: string;
+  textStyle?: string;
 };
-const Navbar = ({ textColor }: navBarProps) => {
+const Navbar = ({ textStyle }: navBarProps) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -17,13 +17,18 @@ const Navbar = ({ textColor }: navBarProps) => {
 
   return (
     // <header className="container sticky top-0 z-10 h-16 dark:bg-black">
-    <header className={`container z-10 h-16 dark:bg-black ${textColor}`}>
+    <header className={`container z-10 h-20 ${textStyle}`}>
       <section className="wrapper h-full flex justify-between items-center">
         {/* logo */}
-        <div className="w-[100px] lg:w-[200px] h-auto relative ">
-          <Link href="/">
-            <img src="/logo-yougo.png" alt="logo" />
-          </Link>
+        <div className="flex flex-col items-center">
+          <div className="w-[100px] lg:w-[200px] h-auto relative ">
+            <Link href="/">
+              <img src="/logo-yougo.png" alt="logo" />
+            </Link>
+          </div>
+          <span className="text-xs font-light ">
+            We help you move to Southeast Asia
+          </span>
         </div>
 
         {/* hamburger menu icon */}

@@ -2,7 +2,7 @@
 
 import { myAxios } from "@/lib/myAxios";
 import qs from "qs";
-import { postType, postsType } from "../../data";
+// import { postType, postsType } from "../../data";
 
 // example query
 //https://example.com/wp-json/wp/v2/posts?categories=13&per_page=100
@@ -62,7 +62,7 @@ export async function getCountryGuide(countryName: string) {
   return result;
 }
 
-const extractDataFromPosts = (posts: any) => {
+const extractDataFromPosts = (posts: any, catMap: Map<number, string>) => {
   const postsData = posts.map((post: any) => {
     return {
       slug: post?.slug,
@@ -70,7 +70,7 @@ const extractDataFromPosts = (posts: any) => {
       // content: post?.content.rendered,
       excerpt: post?.excerpt.rendered,
       featuredImgUrl: post?.acf.featured_image_url,
-      category: parseInt(post?.categories[0]),
+      category: catMap.get(parseInt(post?.categories[0])),
     };
   });
 
@@ -79,9 +79,17 @@ const extractDataFromPosts = (posts: any) => {
 
 export async function getAllPosts() {
   // const res = await myAxios.get("/posts?_embed");
-  const res = await myAxios.get("/posts");
+  // const resCat: Map<number, string> = await getCategories(); // Map id => name
+  const { categoryMap, categoryMapNameToId } = await getCategories(); // Map id => name
+
+  const categoryArray = Array.from(categoryMap, ([id, slug]) => ({
+    id,
+    slug,
+  }));
+
+  const res = await myAxios.get("/posts?orderby=date&order=desc");
   const data = res.data;
-  const posts = extractDataFromPosts(data);
+  const posts = extractDataFromPosts(data, categoryMap);
 
   const totalNumOfPost = parseInt(res.headers["x-wp-total"]);
   // console.log(numOfPost);
@@ -89,6 +97,7 @@ export async function getAllPosts() {
   const result = {
     posts: posts,
     totalNumOfPost,
+    categoryArray,
   };
   // console.log(result);
   return result;
@@ -107,20 +116,28 @@ export async function getAllPosts() {
 //   return Array.from(categories);
 // }
 
-// Map is hashTable, can get the name of category from number
-export async function getCategories(): Promise<Map<number, string>> {
+// change below function to arrow function due to some strange typescript error, and add named export "export { getCategories }"
+// export async function getCategories(): Promise<{Map<number, string>, Map<string,number>}>
+const getCategories = async () => {
   const res = await myAxios.get("/categories?_fields=id,slug");
-  const data = res.data;
-  const categoryMap = new Map();
+  const data = res.data; //array of object
+  // console.log(data, typeof data);
+
+  const categoryMap = new Map(); // id to name
+  const categoryMapNameToId = new Map();
   data.forEach((item: any) => {
     categoryMap.set(item.id, item.slug);
+    categoryMapNameToId.set(item.slug, item.id);
   });
 
   // console.log(categoryMap, typeof categoryMap);
-  return categoryMap;
-}
+  return { categoryMap, categoryMapNameToId };
+};
+export { getCategories };
 
 export async function getSinglePost(slug: string) {
+  const { categoryMap, categoryMapNameToId } = await getCategories(); // Map id => name
+
   const query = qs.stringify(
     {
       slug: slug,
@@ -140,6 +157,70 @@ export async function getSinglePost(slug: string) {
     content: post?.content.rendered,
     excerpt: post?.excerpt.rendered,
     // featuredImgUrl: post?.acf.featured_image_url,
-    category: parseInt(post?.categories[0]),
+    category: categoryMap.get(parseInt(post?.categories[0])),
+  };
+}
+
+export async function getRecentPosts(num: number) {
+  const { posts, totalNumOfPost } = await getAllPosts(); //deduped
+
+  if (!posts) return [];
+
+  if (num >= totalNumOfPost) {
+    return posts;
+  } else {
+    return posts.slice(0, num);
+  }
+}
+
+export async function getPostsByCategory(category: string) {
+  // map category name to id
+  const { categoryMap, categoryMapNameToId } = await getCategories();
+
+  const query = qs.stringify(
+    {
+      categories: categoryMapNameToId.get(category),
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+
+  const res = await myAxios.get(
+    `/posts?${query}&_fields=id,slug,categories,title,excerpt,acf&orderby=date&order=desc`
+  );
+  const data = res.data;
+
+  // console.log(`getPostsByCategory for ${category}:`, data);
+
+  const posts = extractDataFromPosts(data, categoryMap);
+
+  const totalNumOfPost = parseInt(res.headers["x-wp-total"]);
+  // console.log(numOfPost);
+
+  const result = {
+    posts: posts,
+    totalNumOfPost,
+  };
+  // console.log(result);
+  return result;
+}
+
+export async function getPage(slug: string) {
+  const query = qs.stringify(
+    {
+      slug: slug,
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await myAxios.get(`/pages?${query}`);
+  const page = res.data[0];
+
+  return {
+    slug: page?.slug,
+    title: page?.title.rendered,
+    content: page?.content.rendered,
   };
 }

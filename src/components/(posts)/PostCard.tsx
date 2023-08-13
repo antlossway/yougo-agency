@@ -1,15 +1,15 @@
 import React from "react";
-import { postType } from "../../../data";
+import { postcardType } from "../../../data";
 import Image from "next/image";
 import parseHTML from "html-react-parser";
 import Link from "next/link";
 
 type postcardProps = {
-  post: postType;
-  categoryMap: Map<number, string>;
+  post: postcardType;
+  // categoryMap: Map<number, string>;
 };
 
-const PostCard = ({ post, categoryMap }: postcardProps) => {
+const PostCard = ({ post }: postcardProps) => {
   return (
     <Link href={`/articles/${post.slug}`}>
       <div
@@ -33,12 +33,14 @@ const PostCard = ({ post, categoryMap }: postcardProps) => {
         flex flex-col items-center gap-2 text-center"
         >
           <h1 className="text-2xl">{post.title}</h1>
-          <p className="text-normal max-w-[30ch]">{parseHTML(post.excerpt)}</p>
+          {/* <div className="text-normal max-w-[30ch]">
+            {parseHTML(post.excerpt)}
+          </div> */}
         </div>
 
         {/* category */}
-        <span className="self-start p-4  font-medium text-muted text-xs uppercase  ">
-          {categoryMap.get(post.category)}
+        <span className="self-start p-4  font-medium text-xs uppercase italic text-purple-500 ">
+          {post.category}
         </span>
       </div>
     </Link>

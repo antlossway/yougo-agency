@@ -5,13 +5,8 @@ import PostCard from "@/components/(posts)/PostCard";
 import Link from "next/link";
 
 export default async function posts() {
-  const { posts, totalNumOfPost } = await getAllPosts();
+  const { posts, totalNumOfPost, categoryArray } = await getAllPosts();
 
-  const categoryMap = await getCategories(); //Map type, 1:'lifestyle', 7:'education'....
-  const categoryArray = Array.from(categoryMap, ([id, slug]) => ({
-    id,
-    slug,
-  }));
   // console.log(categoryArray);
 
   // console.log(posts, totalNumOfPost);
@@ -24,7 +19,7 @@ export default async function posts() {
       <ul className="flex gap-4">
         {categoryArray.map((cat) => (
           <li key={cat.id}>
-            <Link href={`/categories/${cat.id}`} className="hover:underline">
+            <Link href={`/categories/${cat.slug}`} className="hover:underline">
               {cat.slug}
             </Link>
           </li>
@@ -38,7 +33,7 @@ export default async function posts() {
             key={post.slug}
             className="max-w-xs sm:max-w-none col-span-full sm:col-span-6 lg:col-span-4 xl:col-span-3"
           >
-            <PostCard key={post.slug} post={post} categoryMap={categoryMap} />
+            <PostCard key={post.slug} post={post} />
           </div>
         ))}
       </div>

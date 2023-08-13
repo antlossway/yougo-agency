@@ -46,8 +46,12 @@ const Slider = () => {
     //   className=" h-[calc(100vh-4rem)] w-screen
     // relative"
     // >
+    // <div
+    //   className="absolute top-0 left-0 h-screen w-screen -z-10
+    // "
+    // >
     <div
-      className="absolute top-0 left-0 h-screen w-screen -z-10
+      className="h-screen w-screen -z-10
     "
     >
       <div

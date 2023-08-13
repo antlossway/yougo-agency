@@ -15,6 +15,7 @@ const Highlight = ({ title, subtitle, position }: highlightProps) => {
       w-[300px] h-[300px] text-white
     border-8 border-white/80
     flex flex-col gap-4 justify-center
+    after:content-[''] after:absolute after:-z-10 after:inset-0 after:bg-hero-overlay/70 after:mix-blend-multiply
 
     `}
     >

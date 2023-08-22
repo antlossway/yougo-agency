@@ -7,7 +7,7 @@ const About = async () => {
 
   return (
     <div className="wrapper py-10">
-      <article className="p-4 prose prose-base md:prose-lg prose-slate dark:prose-invert prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline">
+      <article className="mx-auto p-4 prose prose-base md:prose-lg prose-slate dark:prose-invert prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline">
         <h1>{post.title}</h1>
 
         {parseHTML(post.content)}

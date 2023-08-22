@@ -53,7 +53,8 @@ const CountryInfo = async ({ params }: { params: { countryName: string } }) => {
       dark:bg-black
     grid place-content-center "
       >
-        <div className=" flex gap-4">
+        {/* relative for the sticky postion of Table of content */}
+        <div className="relative flex gap-4">
           <article
             className="flex-1 prose prose-base dark:prose-invert md:prose-lg prose-slate  prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline
        "
@@ -71,7 +72,7 @@ const CountryInfo = async ({ params }: { params: { countryName: string } }) => {
 
           {/* table of content */}
           <div
-            className="hidden sticky top-[100px] right-[5vw] md:flex w-[200px] h-[800px] p-8
+            className="hidden sticky top-0  right-[5vw] md:flex w-[200px] h-[800px] p-8
          flex-col gap-4
       border border-green-400"
           >

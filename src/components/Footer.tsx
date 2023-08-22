@@ -4,15 +4,15 @@ import { footerMenuItems } from "../../data";
 const Footer = () => {
   return (
     <div className="container p-4 ">
-      <section className="wrapper text-center lg:text-left">
-        <span className="text-xs font-thin text-center">
+      <section className="wrapper ">
+        <span className="text-xs font-light text-muted text-left">
           ©2023 YouGo. All Rights Reserved.
         </span>
       </section>
 
       <section className="wrapper flex justify-between items-center ">
         {/* logo */}
-        <div className=" ">
+        <div className="hidden sm:block ">
           <Link href="/">
             <Image
               src="/logo-yougo.png"
@@ -30,7 +30,7 @@ const Footer = () => {
         >
           {footerMenuItems.map((item, index) => (
             <Link href={item.url} key={item.name}>
-              <span className="text-xs uppercase text-muted">
+              <span className="text-xs uppercase text-muted ">
                 {index === footerMenuItems.length - 1
                   ? item.name
                   : `${item.name} | `}
